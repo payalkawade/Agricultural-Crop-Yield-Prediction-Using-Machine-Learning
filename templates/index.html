@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ML API - Crop Yield Prediction</title>
+
+  <style>
+    body {
+      font-family: 'Arimo', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f4f4f4;
+    }
+    .container {
+      background-color: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      width: 380px;
+    }
+    h1 {
+      font-size: 22px; /* Reduced font size */
+      text-align: center;
+      color: #2c3e50;
+    }
+    input {
+      width: 100%;
+      padding: 8px; /* Reduced padding */
+      margin: 8px 0;
+      font-size: 14px; /* Smaller font */
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      font-size: 14px; /* Smaller button text */
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #2980b9;
+    }
+    .result {
+      text-align: center;
+      margin-top: 15px;
+      font-size: 16px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Predict Crop Yield</h1>
+
+    <!-- Form to send input data to Flask backend -->
+    <form action="{{ url_for('predict') }}" method="POST">
+      <input type="number" name="Rainfall_mm" placeholder="Rainfall (mm)" required />
+      <input type="number" name="Temperature_Celsius" placeholder="Temperature (°C)" required />
+      <input type="text" name="Fertilizer_Used" placeholder="Fertilizer Used (True/False)" required />
+      <input type="text" name="Irrigation_Used" placeholder="Irrigation Used (True/False)" required />
+      <input type="number" name="Days_to_Harvest" placeholder="Days to Harvest" required />
+
+      <input type="text" name="Region" placeholder="Region (North/South/West)" required />
+      <input type="text" name="Soil_Type" placeholder="Soil Type (Clay/Loam/Peaty/Sandy/Silt)" required />
+      <input type="text" name="Crop" placeholder="Crop (Cotton/Maize/Rice/Soybean/Wheat)" required />
+      <input type="text" name="Weather_Condition" placeholder="Weather Condition (Rainy/Sunny)" required />
+
+      <button type="submit">Predict Crop Yield</button>
+    </form>
+
+    <!-- Display prediction result -->
+    <div class="result">
+      {{ prediction_text }}
+    </div>
+  </div>
+</body>
+</html>
